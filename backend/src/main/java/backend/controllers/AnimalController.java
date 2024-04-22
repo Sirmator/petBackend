@@ -20,26 +20,18 @@ public class AnimalController {
     @Autowired
     public SponsorsRepository sponsorsRepository;
 
-    @DeleteMapping("/delete/{id}")
-    public int removeAnimal(@PathVariable int id){
-        int removed = 0;
-        animalsRepository.deleteByIdAnimal(id);
-        sponsorsRepository.deleteByIdAnimal(id);
-        if (animalsRepository.existsById(id)){
-            removed = 1;
-        }
-        return removed;
-    }
 
-    @PostMapping("/insertAnimals")
+
+    @PostMapping("/updateAnimals")
     public Animals insertAnimal(@RequestBody Animals animals){
-        animals.setNameAnimal(animals.getNameAnimal());
-        animals.setAgeAnimal(animals.getAgeAnimal());
-        animals.setDescAnimal(animals.getDescAnimal());
-        animals.setImgAnimal(animals.getImgAnimal());
-        animals.setVaccinatedAnimal(animals.isVaccinatedAnimal());
-        animals.setPriceAnimal(animals.getPriceAnimal());
-        animals.setSponsored(animals.isSponsored());
+        Animals na = animalsRepository.findByIdAnimal(animals.getIdAnimal());
+        na.setNameAnimal(animals.getNameAnimal());
+        na.setAgeAnimal(animals.getAgeAnimal());
+        na.setDescAnimal(animals.getDescAnimal());
+        na.setImgAnimal(animals.getImgAnimal());
+        na.setVaccinatedAnimal(animals.isVaccinatedAnimal());
+        na.setPriceAnimal(animals.getPriceAnimal());
+        na.setSponsored(animals.isSponsored());
 
         return animalsRepository.save(animals);
 
