@@ -1,6 +1,7 @@
 package backend.controllers;
 
 import backend.entities.Animals;
+import backend.entities.Users;
 import backend.repositories.AnimalsRepository;
 import backend.repositories.SponsorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/animals")
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin()
 public class AnimalController {
 
     @Autowired
@@ -20,11 +21,19 @@ public class AnimalController {
     @Autowired
     public SponsorsRepository sponsorsRepository;
 
+    @PostMapping("/insertAnimal")
+    public Animals insertAnimals(@RequestBody Animals animal){
+        animal.setIdAnimal(animal.getIdAnimal());
 
 
-    @PostMapping("/updateAnimals")
-    public Animals insertAnimal(@RequestBody Animals animals){
+        return animalsRepository.save(animal);
+
+    }
+
+    @PutMapping("/updateAnimals")
+    public Animals updateAnimal(@RequestBody Animals animals){
         Animals na = animalsRepository.findByIdAnimal(animals.getIdAnimal());
+        na.setIdAnimal(animals.getIdAnimal());
         na.setNameAnimal(animals.getNameAnimal());
         na.setAgeAnimal(animals.getAgeAnimal());
         na.setDescAnimal(animals.getDescAnimal());
@@ -32,8 +41,7 @@ public class AnimalController {
         na.setVaccinatedAnimal(animals.isVaccinatedAnimal());
         na.setPriceAnimal(animals.getPriceAnimal());
         na.setSponsored(animals.isSponsored());
-
-        return animalsRepository.save(animals);
+        return animalsRepository.save(na);
 
     }
 

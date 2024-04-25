@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/sponsors")
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin()
 
 public class SponsorController {
 
