@@ -21,10 +21,15 @@ public class AnimalController {
     @Autowired
     public SponsorsRepository sponsorsRepository;
 
-    @PostMapping("/insertAnimal")
+    @PostMapping("/insertAnimals")
     public Animals insertAnimals(@RequestBody Animals animal){
         animal.setIdAnimal(animal.getIdAnimal());
-
+        animal.setNameAnimal(animal.getNameAnimal());
+        animal.setAgeAnimal(animal.getAgeAnimal());
+        animal.setDescAnimal(animal.getDescAnimal());
+        animal.setImgAnimal(animal.getImgAnimal());
+        animal.setVaccinatedAnimal(animal.isVaccinatedAnimal());
+        animal.setPriceAnimal(animal.getPriceAnimal());
 
         return animalsRepository.save(animal);
 
